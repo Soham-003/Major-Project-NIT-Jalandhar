@@ -1,0 +1,20 @@
+{
+	"jupyter.jupyterServerType": "local",
+	"spellright.language": [
+		"en_US"
+	],
+	"spellright.documentTypes": [
+		"latex",
+		"plaintext",
+		"markdown"
+	],
+	"files.exclude": {
+		"**/.git": true,
+		"**/.svn": true,
+		"**/.hg": true,
+		"**/CVS": true,
+		"**/.DS_Store": true,
+		"**/Thumbs.db": true,
+		"**/venv/": true,
+	}
+}
