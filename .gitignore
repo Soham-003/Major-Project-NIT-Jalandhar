@@ -133,12 +133,17 @@ dmypy.json
 # Large files and datasets
 *.pickle
 *.pkl
-*.model
 *.joblib
 data/dataframes/
 **/data/dataframes/
-models/
-**/models/
+
+# Exclude large trained models BUT keep small demo models (needed to run the app)
+# Note: models/demo/ contains small files (< 2MB each) required by the backend
+models/kneighborsclassifier-*.model
+models/svc-*.model
+models/mlpclassifier-*.model
+models/randomforestclassifier-*.model
+
 
 # Node modules (JavaScript)
 node_modules/

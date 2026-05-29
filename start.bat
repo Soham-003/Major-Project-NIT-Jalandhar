@@ -3,7 +3,7 @@ REM Startup script for EEG Driver Fatigue Detection System on Windows
 
 echo.
 echo ================================================================================
-echo EEG Driver Fatigue Detection & Monitoring System
+echo EEG Driver Fatigue Detection ^& Monitoring System
 echo ================================================================================
 echo.
 
@@ -21,8 +21,19 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
-echo [1/4] Installing backend dependencies...
+echo [1/5] Setting up Python virtual environment for backend...
 cd /d "%~dp0webapp\backend"
+if not exist "venv\" (
+    echo Creating virtual environment...
+    python -m venv venv
+    if %errorlevel% neq 0 (
+        echo Error: Failed to create virtual environment
+        exit /b 1
+    )
+)
+
+echo.
+echo [2/5] Installing backend dependencies...
 call .\venv\Scripts\pip.exe install -r requirements.txt
 if %errorlevel% neq 0 (
     echo Error: Backend dependencies installation failed
@@ -30,7 +41,7 @@ if %errorlevel% neq 0 (
 )
 
 echo.
-echo [2/4] Installing frontend dependencies...
+echo [3/5] Installing frontend dependencies...
 cd /d "%~dp0webapp\frontend"
 call cmd.exe /c npm install
 if %errorlevel% neq 0 (
@@ -39,13 +50,13 @@ if %errorlevel% neq 0 (
 )
 
 echo.
-echo [3/4] Starting Flask backend server...
+echo [4/5] Starting Flask backend server...
 echo.
 start cmd /k "cd /d "%~dp0webapp\backend" && .\venv\Scripts\python.exe app.py"
 timeout /t 3
 
 echo.
-echo [4/4] Starting React frontend development server...
+echo [5/5] Starting React frontend development server...
 echo.
 start cmd /k "cd /d "%~dp0webapp\frontend" && cmd.exe /c npm start"
 
@@ -53,8 +64,8 @@ echo.
 echo ================================================================================
 echo System startup complete!
 echo.
-echo Backend: http://127.0.0.1:5050
-echo Frontend: http://localhost:3001
+echo Backend:  http://127.0.0.1:5050
+echo Frontend: http://localhost:3000
 echo.
 echo Press Ctrl+C in the popped up command windows to stop either server.
 echo ================================================================================
